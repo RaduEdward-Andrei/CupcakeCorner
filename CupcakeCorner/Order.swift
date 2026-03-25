@@ -43,11 +43,20 @@ class Order: Codable {
     var zip = ""
     
     var hasValidAddress: Bool {
-        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty {
+        let trimmedName = trimString(name)
+        let trimmedStreetAddress = trimString(streetAddress)
+        let trimmedCity = trimString(city)
+        let trimmedZip = trimString(zip)
+        
+        if trimmedName.isEmpty || trimmedStreetAddress.isEmpty || trimmedCity.isEmpty || trimmedZip.isEmpty {
             return false
         }
         
         return true
+    }
+    
+    func trimString(_ text: String) -> String {
+        text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     var cost: Decimal {
